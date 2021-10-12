@@ -28,11 +28,7 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
       {
         Icon: SiAmazonaws,
         url: 'https://aws.amazon.com/',
-      },
-      {
-        Icon: SiKubernetes,
-        url: 'https://kubernetes.io/',
-      },
+      },     
       {
         Icon: SiTypescript,
         url: 'https://www.typescriptlang.org/',
@@ -56,17 +52,17 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
       </Head>
       <Container alignContent="center" alignItems="center">
         <Title fontSize={['3rem', '4rem']} as="h2">
-          Consultant &rarr; Developer
+          Software Engineer (Front End)
         </Title>
         <Container maxWidth={['100%', '700px']} marginY="2rem">
           <Text>
-            Used to be a consultant, now i build stuff to solve real-life problems.
+            Used to be a tech consultant, now i build stuff to solve real-life problems.
           </Text>
           <Text>
             Since 2020, I create websites independently.
           </Text>
           <Text>
-            Design sensitive, I use Figma to pitch ideas.
+            JavaScript enthsiast | OOP design pattern 
           </Text>
         </Container>
       </Container>
@@ -80,7 +76,7 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
         width="100%"
       >
         <Title fontSize="40px" as="h2">
-          Technologies I frequently use
+          Technologies
         </Title>
         <Grid
           gridTemplateColumns={['repeat(3 , 1fr)', 'repeat(6 , 1fr)']}
