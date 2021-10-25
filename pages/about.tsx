@@ -55,13 +55,13 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
         </Title>
         <Container maxWidth={['100%', '700px']} marginY="2rem">
           <Text>
-            Used to be a tech consultant, now i build stuff to solve real-life problems.
+            I aspire to build stuff to solve real-life problems.
           </Text>
           <Text>
             Since 2020, I create websites independently.
           </Text>
           <Text>
-            JavaScript enthsiast | OOP design pattern 
+            JavaScript enthusiast | OOP design pattern 
           </Text>
         </Container>
       </Container>
@@ -86,7 +86,7 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
           {stacks.map(({ Icon, url }, i) => (
             <Link href={url} key={url}>
               <Card key={i}>
-                <Icon size="2rem" />
+                <Icon size="3rem" />
               </Card>
             </Link>
           ))}
