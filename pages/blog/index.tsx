@@ -26,7 +26,7 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
         <Text textAlign="center">
           Posts about code, projects and various other things. <br />
           Other technical posts are here{' '}
-          <a target="_blank" href="https://marcozee.vercel.app">
+          <a target="_blank" href="blog.marcozee.com">
             link
           </a>
           .
