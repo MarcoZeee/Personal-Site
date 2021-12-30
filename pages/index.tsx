@@ -38,7 +38,7 @@ const Home = (): JSX.Element => (
       <Container maxWidth="700px" gridGap="3rem">
         <Container>
           <Text textAlign="center">
-            I'm Software Engineer based in Shanghai. Focus on React, Node, graphQL and Express.js. I'm still a JavaScript enthusaist!
+            Software Engineer based in Shanghai | MERN stack | JavaScript person
           </Text>
         </Container>
         <Link href="/about">
