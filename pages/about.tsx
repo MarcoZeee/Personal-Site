@@ -51,17 +51,11 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
       </Head>
       <Container alignContent="center" alignItems="center">
         <Title fontSize={['3rem', '4rem']} as="h2">
-          Software Engineer (Front End)
+          Software Engineer 
         </Title>
         <Container maxWidth={['100%', '700px']} marginY="2rem">
           <Text>
-            I aspire to build stuff to solve real-life problems.
-          </Text>
-          <Text>
-            Since 2020, I create websites independently.
-          </Text>
-          <Text>
-            JavaScript enthusiast | OOP design pattern 
+            a JavaScript person | MERN
           </Text>
         </Container>
       </Container>
