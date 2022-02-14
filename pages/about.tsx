@@ -1,7 +1,7 @@
-import React from 'react';
-import { Title, Text, Container, Grid, Link, Card } from '@components';
-import { GetStaticProps } from 'next';
-import Head from 'next/head';
+import React from "react";
+import { Title, Text, Container, Grid, Link, Card } from "@components";
+import { GetStaticProps } from "next";
+import Head from "next/head";
 
 import {
   SiTypescript,
@@ -9,9 +9,9 @@ import {
   SiReact,
   SiNextDotJs,
   SiGraphql,
-} from 'react-icons/si';
-import { getPosts, Post } from '@posts';
-import { TransparentLink } from '@components';
+} from "react-icons/si";
+import { getPosts, Post } from "@posts";
+import { TransparentLink } from "@components";
 
 interface AboutProps {
   experiences: Post[];
@@ -22,26 +22,26 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
     () => [
       {
         Icon: SiReact,
-        url: 'https://reactjs.org/',
+        url: "https://reactjs.org/",
       },
       {
         Icon: SiAmazonaws,
-        url: 'https://aws.amazon.com/',
-      },     
+        url: "https://aws.amazon.com/",
+      },
       {
         Icon: SiTypescript,
-        url: 'https://www.typescriptlang.org/',
+        url: "https://www.typescriptlang.org/",
       },
       {
         Icon: SiGraphql,
-        url: 'https://graphql.org/',
+        url: "https://graphql.org/",
       },
       {
         Icon: SiNextDotJs,
-        url: 'https://nextjs.org/',
+        url: "https://nextjs.org/",
       },
     ],
-    [],
+    []
   );
 
   return (
@@ -50,13 +50,13 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
         <title>About</title>
       </Head>
       <Container alignContent="center" alignItems="center">
-        <Title fontSize={['3rem', '4rem']} as="h2">
-          Software Engineer 
+        <Title fontSize={["3rem", "4rem"]} as="h2">
+          Software Engineer
         </Title>
-        <Container maxWidth={['100%', '700px']} marginY="2rem">
-          <Text>
-            a JavaScript person | MERN
-          </Text>
+        <Container maxWidth={["100%", "700px"]} marginY="2rem">
+          <Text>"JavaScript Everything"</Text>
+          <Text>MERN</Text>
+          <Text>Functional Programming with Closure | OOP design</Text>
         </Container>
       </Container>
 
@@ -72,7 +72,7 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
           Technologies
         </Title>
         <Grid
-          gridTemplateColumns={['repeat(3 , 1fr)', 'repeat(6 , 1fr)']}
+          gridTemplateColumns={["repeat(3 , 1fr)", "repeat(6 , 1fr)"]}
           gridGap="1rem"
           justifyItems="center"
           maxWidth="40rem"
@@ -149,9 +149,9 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const experiences = await getPosts('experiences');
+  const experiences = await getPosts("experiences");
   experiences.sort((a, b) =>
-    b.data.date.toString().localeCompare(a.data.date.toString()),
+    b.data.date.toString().localeCompare(a.data.date.toString())
   );
 
   return {

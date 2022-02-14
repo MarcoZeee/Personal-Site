@@ -1,10 +1,10 @@
-import React from 'react';
-import Head from 'next/head';
-import styled from 'styled-components';
-import { GetStaticProps } from 'next';
+import React from "react";
+import Head from "next/head";
+import styled from "styled-components";
+import { GetStaticProps } from "next";
 
-import { Title, Container, Text, Button, Grid, Link, List } from '@components';
-import { getPosts, Post } from '@posts';
+import { Title, Container, Text, Button, Grid, Link, List } from "@components";
+import { getPosts, Post } from "@posts";
 
 interface ProjectProps {
   projects: Post[];
@@ -12,19 +12,19 @@ interface ProjectProps {
 
 const ProjectImage = styled.img`
   width: 100%;
-  height: 300px;
+  height: 100%;
   object-fit: cover;
   border-radius: 4px;
-  transition: 0.2s ease-in-out 0s;
+  transition: 0.3s ease-in 0s;
 
   :hover {
-    transform: scale(1.02);
+    transform: scale(1.1);
   }
 `;
 
 const ProjectContainer = styled(Container)`
   :hover > * img {
-    transform: scale(1.03);
+    transform: scale(1.1);
   }
 `;
 
@@ -53,7 +53,7 @@ const Projects = ({ projects }: ProjectProps): JSX.Element => (
     </Container>
     <Grid
       py="4rem"
-      gridTemplateColumns={['1fr', 'repeat(2, 1fr)']}
+      gridTemplateColumns={["1fr", "repeat(2, 1fr)"]}
       width="100%"
       gridGap="10%"
     >
@@ -105,7 +105,7 @@ const Projects = ({ projects }: ProjectProps): JSX.Element => (
 );
 
 export const getStaticProps: GetStaticProps = async () => {
-  const projects = await getPosts('projects');
+  const projects = await getPosts("projects");
 
   return {
     props: {

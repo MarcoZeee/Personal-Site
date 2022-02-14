@@ -1,9 +1,9 @@
-import React from 'react';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
+import React from "react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 
-import { Container, Title, Button, Grid, Link, Text } from '@components';
-import styles from '@styles/Home.module.css';
+import { Container, Title, Button, Grid, Link, Text } from "@components";
+import styles from "@styles/Home.module.css";
 
 const Home = (): JSX.Element => (
   <Container>
@@ -42,7 +42,7 @@ const Home = (): JSX.Element => (
           </Text>
         </Container>
         <Link href="/about">
-          <Button>More? &rarr;</Button>
+          <Button>More info... &rarr;</Button>
         </Link>
       </Container>
     </Container>
@@ -52,36 +52,31 @@ const Home = (): JSX.Element => (
         <Title fontSize="3rem" as="h3">
           Talk to me
         </Title>
-        <Text textAlign="center">
-          Any ideas on tech welcomed!
-        </Text>
+        <Text textAlign="center">Also a Medium writer</Text>
         <Grid
           gridGap="2rem"
           marginTop="2rem"
-          gridTemplateColumns={['1fr', 'repeat(2, 1fr)']}
+          gridTemplateColumns={["1fr", "repeat(2, 1fr)"]}
           justifyItems="stretch"
           alignItems="stretch"
         >
-          <Link href="wechat: therealairbender">
+          <Link href="https://medium.com/@marcozee">
             <Button width="100%">
               <motion.span
-                initial={{ display: 'inline-block' }}
+                initial={{ display: "inline-block" }}
                 animate={{ rotate: [0, 14, -8, 14, -4, 10, 0, 0] }}
                 transition={{
                   repeat: Infinity,
-                  repeatType: 'reverse',
+                  repeatType: "reverse",
                   duration: 2.5,
                 }}
               >
                 🤟
-              </motion.span>{' '}
+              </motion.span>{" "}
               Say hi
             </Button>
           </Link>
-          <Link
-            target="_blank"
-            href="mailto:marcoshihh@yahoo.ca"
-          >
+          <Link target="_blank" href="mailto:marcoshihh@yahoo.ca">
             <Button
               width="100%"
               backgroundColor="rgb(226,232,240)"
