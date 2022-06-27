@@ -32,13 +32,13 @@ const Home = (): JSX.Element => (
           fontWeight="500"
           as="h2"
         >
-          I construct and maintain.
+          I compose and pipe.
         </Title>
       </Container>
       <Container maxWidth="700px" gridGap="3rem">
         <Container>
           <Text textAlign="center">
-            Software Engineer based in Shanghai | MERN stack | JavaScript person
+            Fullstack | React | TypeScript | Functional | NodeJS | GraphQL |
           </Text>
         </Container>
         <Link href="/about">
@@ -50,7 +50,7 @@ const Home = (): JSX.Element => (
     <Container alignItems="center" paddingY="4rem">
       <Container maxWidth="600px" alignItems="center" alignContent="center">
         <Title fontSize="3rem" as="h3">
-          Talk to me
+          Check me out here
         </Title>
         <Text textAlign="center">Also a Medium writer</Text>
         <Grid

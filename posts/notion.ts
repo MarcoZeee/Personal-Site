@@ -5,10 +5,6 @@ export const POSTS = {
 };
 
 export const EXPERIENCES = {
-  SIA: {
-    date: '2019 - Now',
-    uri: 'shblog/Shareview-CTO-b3f7d62a744d4cb7bd271d25f4790ece',
-  }
 };
 
 export interface PageInfo {

@@ -24,14 +24,21 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
       <Container mb="3rem">
         <Title>Blog</Title>
         <Text textAlign="center">
-          Posts about code, projects and various other things. <br />
-          Other technical posts are here{' '}
-          <a target="_blank" href="https://marcozee.vercel.app">
-            link
-          </a>
-          .
+          I write posts about software engineering, tech, and business thinking.
         </Text>
       </Container>
+      <Grid>
+        <Link href={`https://medium.com/@marcozee/understanding-event-loop-a-react-approach-c3a8f4992869`}>
+          <Card margin={1}>
+            Event Loop with React Deep Dive 
+          </Card>
+        </Link>
+        <Link href={`https://medium.com/@marcozee/why-you-and-your-company-probably-shouldnt-use-vue-the-hard-way-b9d00f2ef8f4`}>
+          <Card margin={1}>
+            Frontend Migration from Vue to React 
+          </Card>
+        </Link>
+      </Grid>
       <Grid gridTemplateColumns={['1fr', '1fr 1fr']} gridGap={['3rem', '2rem']}>
         {pages.map(({ title, uri, date, cover }, i) => (
           <Link key={i} href={uri}>
