@@ -38,7 +38,7 @@ const Home = (): JSX.Element => (
       <Container maxWidth="700px" gridGap="3rem">
         <Container>
           <Text textAlign="center">
-            Fullstack | React | TypeScript | Functional | NodeJS | GraphQL |
+            Fullstack | React | TypeScript | Functional | Redux | GraphQL
           </Text>
         </Container>
         <Link href="/about">
@@ -64,7 +64,7 @@ const Home = (): JSX.Element => (
             <Button width="100%">
               <motion.span
                 initial={{ display: "inline-block" }}
-                animate={{ rotate: [0, 14, -8, 14, -4, 10, 0, 0] }}
+                animate={{ rotate: [22, 18, -8, 14, -4, 10, 4, -4] }}
                 transition={{
                   repeat: Infinity,
                   repeatType: "reverse",

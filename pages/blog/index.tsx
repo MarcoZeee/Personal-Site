@@ -1,10 +1,10 @@
-import Head from 'next/head';
-import styled from 'styled-components';
-import { GetStaticPropsResult, NextPage } from 'next';
-import { NotionAPI } from 'notion-client';
+import Head from "next/head";
+import styled from "styled-components";
+import { GetStaticPropsResult, NextPage } from "next";
+import { NotionAPI } from "notion-client";
 
-import { getPageInfo, Page, POSTS } from '@posts/notion';
-import { Title, Link, Container, Grid, Card, Image, Text } from '@components';
+import { getPageInfo, Page, POSTS } from "@posts/notion";
+import { Title, Link, Container, Grid, Card, Image, Text } from "@components";
 
 interface BlogProps {
   pages: Page[];
@@ -27,25 +27,44 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
           I write posts about software engineering, tech, and business thinking.
         </Text>
       </Container>
-      <Grid>
-        <Link href={`https://medium.com/@marcozee/understanding-event-loop-a-react-approach-c3a8f4992869`}>
+      <Grid gridTemplateColumns={`1fr`} gridGap={`1rem`}>
+        <Link
+          href={`https://medium.com/@marcozee/understanding-event-loop-a-react-approach-c3a8f4992869`}
+        >
           <Card margin={1}>
-            Event Loop with React Deep Dive 
+            <Container>
+              <Title fontSize={`1.5rem`}>
+                Event Loop with React Deep Dive{" "}
+              </Title>
+              <Text>
+                Asynchronous JS is hard to make it right, and in this article
+                this part is demystifed, of course, all with React.
+              </Text>
+            </Container>
           </Card>
         </Link>
-        <Link href={`https://medium.com/@marcozee/why-you-and-your-company-probably-shouldnt-use-vue-the-hard-way-b9d00f2ef8f4`}>
+        <Link
+          href={`https://medium.com/@marcozee/why-you-and-your-company-probably-shouldnt-use-vue-the-hard-way-b9d00f2ef8f4`}
+        >
           <Card margin={1}>
-            Frontend Migration from Vue to React 
+            <Container>
+              <Title fontSize={`1.5rem`}>
+              Frontend Migration from Vue to React
+              </Title>
+              <Text>
+                What are those tradeoffs when choosing the right frontend framework? Migration in a nutshell from Vue to React.
+              </Text>
+            </Container>
           </Card>
         </Link>
       </Grid>
-      <Grid gridTemplateColumns={['1fr', '1fr 1fr']} gridGap={['3rem', '2rem']}>
+      <Grid gridTemplateColumns={["1fr", "1fr 1fr"]} gridGap={["3rem", "2rem"]}>
         {pages.map(({ title, uri, date, cover }, i) => (
           <Link key={i} href={uri}>
             <Card padding={[0]} margin={[0]}>
               <Grid
-                gridTemplateColumns={'1fr'}
-                justifyItems={['center', 'flex-start']}
+                gridTemplateColumns={"1fr"}
+                justifyItems={["center", "flex-start"]}
                 gridGap="1rem"
               >
                 {cover && (
@@ -58,12 +77,12 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
                 )}
                 <Container
                   gridGap=".5rem"
-                  alignItems={['center', 'flex-start']}
+                  alignItems={["center", "flex-start"]}
                 >
                   <Title
                     as="h2"
                     fontSize="1.5rem"
-                    textAlign={['center', 'left']}
+                    textAlign={["center", "left"]}
                     margin={0}
                   >
                     {title}
@@ -93,7 +112,7 @@ export const getStaticProps = async (): Promise<
       const page = await notion.getPage(uri);
       if (page) {
         const info = getPageInfo(page);
-        if (info.title !== 'Blog') {
+        if (info.title !== "Blog") {
           pages.push({
             ...info,
             date,
@@ -101,13 +120,13 @@ export const getStaticProps = async (): Promise<
           });
         }
       }
-    }),
+    })
   );
 
   return {
     props: {
       pages: pages.sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
       ),
     },
   };
