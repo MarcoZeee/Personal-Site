@@ -29,16 +29,16 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
       </Container>
       <Grid gridTemplateColumns={`1fr`} gridGap={`1rem`}>
         <Link
-          href={`https://medium.com/@marcozee/understanding-event-loop-a-react-approach-c3a8f4992869`}
+          href={`https://medium.com/@marcozee/graphql-deno-modern-duo-for-backend-208bde260830`}
         >
           <Card margin={1}>
             <Container>
               <Title fontSize={`1.5rem`}>
-                Event Loop with React Deep Dive{" "}
+                Intro to Modern Backend: GraphQL + Deno
               </Title>
               <Text>
-                Asynchronous JS is hard to make it right, and in this article
-                this part is demystifed, of course, all with React.
+                Backend development is a breeze when you understand it. This
+                article teaches you how to use GraphQL and Deno.
               </Text>
             </Container>
           </Card>
@@ -49,10 +49,26 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
           <Card margin={1}>
             <Container>
               <Title fontSize={`1.5rem`}>
-              Frontend Migration from Vue to React
+                Frontend Migration from Vue to React
               </Title>
               <Text>
-                What are those tradeoffs when choosing the right frontend framework? Migration in a nutshell from Vue to React.
+                What are those tradeoffs when choosing the right frontend
+                framework? Migration in a nutshell from Vue to React.
+              </Text>
+            </Container>
+          </Card>
+        </Link>
+        <Link
+          href={`https://medium.com/@marcozee/understanding-event-loop-a-react-approach-c3a8f4992869`}
+        >
+          <Card margin={1}>
+            <Container>
+              <Title fontSize={`1.5rem`}>
+                Event Loop with React: Deep Dive{" "}
+              </Title>
+              <Text>
+                Asynchronous JS is hard to make it right, and in this article
+                this part is demystifed, of course, all with React.
               </Text>
             </Container>
           </Card>
