@@ -4,7 +4,7 @@ import { GetStaticPropsResult, NextPage } from "next";
 import { NotionAPI } from "notion-client";
 
 import { getPageInfo, Page, POSTS } from "@posts/notion";
-import { Title, Container, Grid, Card, Image, Text } from "@components";
+import { Title, Container, Grid, Card, Image, Text, Link } from "@components";
 import { useRouter } from "next/router";
 import { blogsInfo } from "text";
 
@@ -36,14 +36,14 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
       <Grid gridTemplateColumns={`1fr`} gridGap={`1rem`}>
         {blogsInfo.map((blog) => {
           return (
-            <a href={blog.href}>
+            <Link href={blog.href}>
               <Card margin={1}>
                 <Container>
                   <Title fontSize={`1.5rem`}>{blog.title}</Title>
                   <Text>{blog.description}</Text>
                 </Container>
               </Card>
-            </a>
+            </Link>
           );
         })}
       </Grid>

@@ -10,7 +10,7 @@ export const textContext = {
 export const blogsInfo = [
   {
     href:
-      "https://www.linkedin.com/pulse/intro-modern-backend-graphql-deno-marcos-oliveira/",
+      "https://medium.com/@marcozee/graphql-deno-modern-duo-for-backend-208bde260830",
     title: "Intro to Modern Backend: GraphQL + Deno",
     description:
       "Backend development is a breeze when you understand it. This article teaches you how to use GraphQL and Deno.",
