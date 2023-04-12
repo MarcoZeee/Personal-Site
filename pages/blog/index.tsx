@@ -6,7 +6,7 @@ import { NotionAPI } from "notion-client";
 import { getPageInfo, Page, POSTS } from "@posts/notion";
 import { Title, Container, Grid, Card, Image, Text } from "@components";
 import { useRouter } from "next/router";
-import { blogsInfo } from "./context";
+import { blogsInfo } from "text";
 
 interface BlogProps {
   pages: Page[];
