@@ -12,6 +12,7 @@ import {
 } from "react-icons/si";
 import { getPosts, Post } from "@posts";
 import { TransparentLink } from "@components";
+import { textContext } from "text";
 
 interface AboutProps {
   experiences: Post[];
@@ -54,9 +55,9 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
           Software Engineer
         </Title>
         <Container maxWidth={["100%", "700px"]} marginY="2rem">
-          <Text>"JavaScript Everything"</Text>
-          <Text>MERN with TypeScript</Text>
-          <Text>Functional Programmer | OOP design</Text>
+          {textContext.aboutPage.map((text) => {
+            return <Text>{text}</Text>;
+          })}
         </Container>
       </Container>
 

@@ -4,7 +4,9 @@ import { GetStaticPropsResult, NextPage } from "next";
 import { NotionAPI } from "notion-client";
 
 import { getPageInfo, Page, POSTS } from "@posts/notion";
-import { Title, Link, Container, Grid, Card, Image, Text } from "@components";
+import { Title, Container, Grid, Card, Image, Text } from "@components";
+import { useRouter } from "next/router";
+import { blogsInfo } from "./context";
 
 interface BlogProps {
   pages: Page[];
@@ -15,6 +17,10 @@ const BlogImage = styled(Image)`
 `;
 
 const Blog: NextPage<BlogProps> = ({ pages }) => {
+  const router = useRouter();
+  const handleClick = (slug: string) => {
+    router.push(`/blog/${slug}`);
+  };
   return (
     <Container maxWidth={1200}>
       <Head>
@@ -28,55 +34,29 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
         </Text>
       </Container>
       <Grid gridTemplateColumns={`1fr`} gridGap={`1rem`}>
-        <Link
-          href={`https://medium.com/@marcozee/graphql-deno-modern-duo-for-backend-208bde260830`}
-        >
-          <Card margin={1}>
-            <Container>
-              <Title fontSize={`1.5rem`}>
-                Intro to Modern Backend: GraphQL + Deno
-              </Title>
-              <Text>
-                Backend development is a breeze when you understand it. This
-                article teaches you how to use GraphQL and Deno.
-              </Text>
-            </Container>
-          </Card>
-        </Link>
-        <Link
-          href={`https://medium.com/@marcozee/why-you-and-your-company-probably-shouldnt-use-vue-the-hard-way-b9d00f2ef8f4`}
-        >
-          <Card margin={1}>
-            <Container>
-              <Title fontSize={`1.5rem`}>
-                Frontend Migration from Vue to React
-              </Title>
-              <Text>
-                What are those tradeoffs when choosing the right frontend
-                framework? Migration in a nutshell from Vue to React.
-              </Text>
-            </Container>
-          </Card>
-        </Link>
-        <Link
-          href={`https://medium.com/@marcozee/understanding-event-loop-a-react-approach-c3a8f4992869`}
-        >
-          <Card margin={1}>
-            <Container>
-              <Title fontSize={`1.5rem`}>
-                Event Loop with React: Deep Dive{" "}
-              </Title>
-              <Text>
-                Asynchronous JS is hard to make it right, and in this article
-                this part is demystifed, of course, all with React.
-              </Text>
-            </Container>
-          </Card>
-        </Link>
+        {blogsInfo.map((blog) => {
+          return (
+            <a href={blog.href}>
+              <Card margin={1}>
+                <Container>
+                  <Title fontSize={`1.5rem`}>{blog.title}</Title>
+                  <Text>{blog.description}</Text>
+                </Container>
+              </Card>
+            </a>
+          );
+        })}
       </Grid>
       <Grid gridTemplateColumns={["1fr", "1fr 1fr"]} gridGap={["3rem", "2rem"]}>
         {pages.map(({ title, uri, date, cover }, i) => (
-          <Link key={i} href={uri}>
+          <a
+            key={i}
+            href={uri}
+            onClick={(e) => {
+              e.preventDefault();
+              handleClick(uri);
+            }}
+          >
             <Card padding={[0]} margin={[0]}>
               <Grid
                 gridTemplateColumns={"1fr"}
@@ -109,7 +89,7 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
                 </Container>
               </Grid>
             </Card>
-          </Link>
+          </a>
         ))}
       </Grid>
     </Container>
