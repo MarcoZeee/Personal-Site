@@ -5,6 +5,16 @@ export const textContext = {
     "Functional Reactive Programming with RxJS",
     "PyTorch for Data Manipulation",
   ],
+  indexPage: {
+    techStack: [
+      "React",
+      "Next w/ TypeScript",
+      "GraphQL",
+      "Django",
+      "Express",
+      "Docker",
+    ],
+  },
 };
 
 export const blogsInfo = [

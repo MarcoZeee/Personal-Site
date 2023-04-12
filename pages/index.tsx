@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 
 import { Container, Title, Button, Grid, Link, Text } from "@components";
 import styles from "@styles/Home.module.css";
+import { textContext } from "text";
 
 const Home = (): JSX.Element => (
   <Container>
@@ -38,7 +39,11 @@ const Home = (): JSX.Element => (
       <Container maxWidth="700px" gridGap="3rem">
         <Container>
           <Text textAlign="center">
-            Fullstack | React | TypeScript | Functional | Redux | GraphQL
+            {textContext.indexPage.techStack.map((text, i) => {
+              return i === textContext.indexPage.techStack.length - 1
+                ? text
+                : `${text} |`;
+            })}
           </Text>
         </Container>
         <Link href="/about">
