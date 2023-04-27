@@ -42,7 +42,7 @@ const Home = (): JSX.Element => (
             {textContext.indexPage.techStack.map((text, i) => {
               return i === textContext.indexPage.techStack.length - 1
                 ? text
-                : `${text} |`;
+                : `${text} | `;
             })}
           </Text>
         </Container>
