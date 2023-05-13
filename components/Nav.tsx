@@ -61,7 +61,6 @@ const Nav = (): JSX.Element => {
       gridTemplateColumns={['1fr', '1fr', '1fr 1fr 1fr']}
     >
       <Container display={['none', 'none', 'flex']}>
-        <NavLink href="/">Marco Zee</NavLink>
       </Container>
       <Container alignContent="center">
         <Grid
@@ -95,7 +94,6 @@ const Nav = (): JSX.Element => {
         </Grid>
       </Container>
       <Container alignContent="flex-end" display={['none', 'none', 'flex']}>
-        <NavLink href="mailto:marcoshihh@yahoo.ca">Contact</NavLink>
       </Container>
     </Grid>
   );

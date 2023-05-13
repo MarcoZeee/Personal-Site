@@ -8,7 +8,7 @@ export interface CardProps extends GridProps {
 }
 
 const Card = styled(Grid)<CardProps>`
-  background-color: white;
+  background-color: #f3f6f4;
   padding: 30px;
   cursor: pointer;
   border-radius: 10px;

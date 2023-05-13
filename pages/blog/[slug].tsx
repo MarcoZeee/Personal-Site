@@ -1,30 +1,31 @@
 import Head from 'next/head';
 import { GetStaticPaths, GetStaticPropsResult, NextPage } from 'next';
-import { NotionRenderer, NotionRendererProps, Code } from 'react-notion-x';
-import { NotionAPI } from 'notion-client';
+import { Container, Text, Title } from '@components';
 
-import { getPageInfo, Page, POSTS } from '@posts/notion';
-import { Container, Text } from '@components';
-
-interface BlogProps {
-  page: Page;
-  recordMap: NotionRendererProps['recordMap'];
-}
-
-const Blog: NextPage<BlogProps> = ({ page, recordMap }) => (
+const POSTS = {
+  'how-to-learn': {
+    title: 'How to learn',
+    description: 'How to learn',
+    date: '2021-08-01',
+  },
+};
+const Blog = ({page}: {
+  page: {
+    title: string;
+    description: string;
+    date: string;
+  };
+}) => (
   <Container width={['100%', 1200]} maxWidth="100vw">
     <Head>
       <title>{page.title}</title>
       <meta property="og:title" content={page.title} />
     </Head>
-    <NotionRenderer
-      fullPage
-      className="notion-container"
-      recordMap={recordMap}
-      components={{
-        code: Code,
-      }}
-    />
+    <Container maxWidth="700px" margin="0 auto">
+      <Title>{page.title}</Title>
+      <Text textAlign="center">{page.description}</Text>
+    </Container>
+
     <Container textAlign="center" gridGap=".4rem" my="3rem">
       <Text margin={0}>Marco Zee</Text>
       <small>{page.date}</small>
@@ -49,24 +50,20 @@ type Params = {
   };
 };
 
-const notion = new NotionAPI();
-
 export const getStaticProps = async ({
   params: { slug },
-}: Params): Promise<GetStaticPropsResult<BlogProps>> => {
+}: Params) => {
   const { uri, date } = POSTS[slug];
   const recordMap = await notion.getPage(uri);
   const pageInfo = getPageInfo(recordMap);
-  const page: Page = {
+  const page = {
     ...pageInfo,
-    uri,
     date,
   };
 
   return {
     props: {
       page,
-      recordMap,
     },
   };
 };
