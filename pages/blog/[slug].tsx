@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import { GetStaticPaths, GetStaticPropsResult, NextPage } from 'next';
+import { GetStaticPaths } from 'next';
 import { Container, Text, Title } from '@components';
 
 const POSTS = {
@@ -53,11 +53,9 @@ type Params = {
 export const getStaticProps = async ({
   params: { slug },
 }: Params) => {
-  const { uri, date } = POSTS[slug];
-  const recordMap = await notion.getPage(uri);
-  const pageInfo = getPageInfo(recordMap);
+  const { title, date } = POSTS[slug];
   const page = {
-    ...pageInfo,
+    title,
     date,
   };
 
