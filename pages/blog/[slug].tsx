@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { GetStaticPaths } from 'next';
 import { Container, Text, Title } from '@components';
 
 const POSTS = {
@@ -33,26 +32,8 @@ const Blog = ({page}: {
   </Container>
 );
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return {
-    paths: Object.keys(POSTS).map((slug) => ({
-      params: {
-        slug,
-      },
-    })),
-    fallback: false,
-  };
-};
-
-type Params = {
-  params: {
-    slug: keyof typeof POSTS;
-  };
-};
-
-export const getStaticProps = async ({
-  params: { slug },
-}: Params) => {
+export const getStaticProps = async () => {
+  const slug = 'how-to-learn';
   const { title, date } = POSTS[slug];
   const page = {
     title,
@@ -65,5 +46,15 @@ export const getStaticProps = async ({
     },
   };
 };
+
+export const getStaticPaths = async () => {
+  const paths = Object.keys(POSTS).map((slug) => ({
+    params: { slug },
+  }));
+  return {
+    paths,
+    fallback: false,
+  }
+}
 
 export default Blog;

@@ -7,7 +7,7 @@ import {
   SiTypescript,
   SiAmazonaws,
   SiReact,
-  SiNextDotJs,
+  SiNextdotjs,
   SiGraphql,
 } from "react-icons/si";
 import { getPosts, Post } from "@posts";
@@ -38,7 +38,7 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
         url: "https://graphql.org/",
       },
       {
-        Icon: SiNextDotJs,
+        Icon: SiNextdotjs,
         url: "https://nextjs.org/",
       },
     ],
@@ -55,8 +55,8 @@ const About = ({ experiences }: AboutProps): JSX.Element => {
           Software Engineer
         </Title>
         <Container maxWidth={["100%", "700px"]} marginY="2rem">
-          {textContext.aboutPage.map((text) => {
-            return <Text>{text}</Text>;
+          {textContext.aboutPage.map((text, key) => {
+            return <Text key={key}>{text}</Text>;
           })}
         </Container>
       </Container>

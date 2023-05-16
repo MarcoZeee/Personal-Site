@@ -1,22 +1,23 @@
 import Head from "next/head";
-import styled from "styled-components";
-import { GetStaticPropsResult, NextPage } from "next";
-import { NotionAPI } from "notion-client";
+import { NextPage } from "next";
 
-import { getPageInfo, Page, POSTS } from "@posts/notion";
-import { Title, Container, Grid, Card, Image, Text, Link } from "@components";
+import { Title, Container, Grid, Card, Text, Link } from "@components";
 import { useRouter } from "next/router";
 import { blogsInfo } from "text";
 
+type BlogEntry = {
+  title: string;
+  description: string;
+  date: string;
+  slug: string;
+  image: string;
+};
 interface BlogProps {
-  pages: Page[];
+  pages: BlogEntry[];
 }
 
-const BlogImage = styled(Image)`
-  border-radius: 5px;
-`;
 
-const Blog: NextPage<BlogProps> = ({ pages }) => {
+const Blog: NextPage<BlogProps> = () => {
   const router = useRouter();
   const handleClick = (slug: string) => {
     router.push(`/blog/${slug}`);
@@ -25,7 +26,7 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
     <Container maxWidth={1200}>
       <Head>
         <title>Blog</title>
-        <meta property="og:title" content="Blog – Marco Zee" />
+        <meta property="og:title" content="Blog - Marco Zee" />
       </Head>
       <Container mb="3rem">
         <Title>Blog</Title>
@@ -36,7 +37,10 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
       <Grid gridTemplateColumns={`1fr`} gridGap={`1rem`}>
         {blogsInfo.map((blog) => {
           return (
-            <Link href={blog.href}>
+            <Link href={blog.href} onClick={(e) => {
+              e.preventDefault();
+              handleClick(blog.href);
+            }} key={blog.title}>
               <Card margin={1}>
                 <Container>
                   <Title fontSize={`1.5rem`}>{blog.title}</Title>
@@ -47,8 +51,8 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
           );
         })}
       </Grid>
-      <Grid gridTemplateColumns={["1fr", "1fr 1fr"]} gridGap={["3rem", "2rem"]}>
-        {pages.map(({ title, uri, date, cover }, i) => (
+      {/* <Grid gridTemplateColumns={["1fr", "1fr 1fr"]} gridGap={["3rem", "2rem"]}>
+        {pages.map(({ title, slug, date, cover }, i) => (
           <a
             key={i}
             href={uri}
@@ -91,41 +95,10 @@ const Blog: NextPage<BlogProps> = ({ pages }) => {
             </Card>
           </a>
         ))}
-      </Grid>
+      </Grid> */}
     </Container>
   );
 };
 
-const notion = new NotionAPI();
-
-export const getStaticProps = async (): Promise<
-  GetStaticPropsResult<BlogProps>
-> => {
-  const pages: Page[] = [];
-  await Promise.all(
-    Object.keys(POSTS).map(async (key) => {
-      const { uri, date } = POSTS[key as keyof typeof POSTS];
-      const page = await notion.getPage(uri);
-      if (page) {
-        const info = getPageInfo(page);
-        if (info.title !== "Blog") {
-          pages.push({
-            ...info,
-            date,
-            uri: `/blog/${key}`,
-          });
-        }
-      }
-    })
-  );
-
-  return {
-    props: {
-      pages: pages.sort(
-        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-      ),
-    },
-  };
-};
 
 export default Blog;

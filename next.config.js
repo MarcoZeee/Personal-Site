@@ -1,15 +1,6 @@
-module.exports = {
-  target: 'serverless',
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback.fs = false;
-    }
-
-    config.module.rules.push({
-      test: /\.md|\.mdx$/,
-      use: 'raw-loader',
-    });
-
-    return config;
-  },
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  /* config options here */
 };
+ 
+module.exports = nextConfig;

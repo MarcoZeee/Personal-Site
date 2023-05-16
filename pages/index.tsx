@@ -21,9 +21,8 @@ const Home = (): JSX.Element => (
         <Image
           src="/me.jpg"
           alt="Marco Zee"
-          width="200px"
-          height="200px"
-          objectFit="cover"
+          width={200}
+          height={200}
           className={styles.image}
         />
         <Title>Marco Zee</Title>
