@@ -1,5 +1,7 @@
 import Head from 'next/head';
-import { Container, Text, Title } from '@components';
+import { Container} from '@components';
+import Post from "posts/react.mdx";
+// import {MDXProvider} from '@mdx-js/react';
 
 const POSTS = {
   'how-to-learn': {
@@ -14,21 +16,15 @@ const Blog = ({page}: {
     description: string;
     date: string;
   };
+  
 }) => (
   <Container width={['100%', 1200]} maxWidth="100vw">
     <Head>
       <title>{page.title}</title>
       <meta property="og:title" content={page.title} />
     </Head>
-    <Container maxWidth="700px" margin="0 auto">
-      <Title>{page.title}</Title>
-      <Text textAlign="center">{page.description}</Text>
-    </Container>
+    <Post />
 
-    <Container textAlign="center" gridGap=".4rem" my="3rem">
-      <Text margin={0}>Marco Zee</Text>
-      <small>{page.date}</small>
-    </Container>
   </Container>
 );
 
@@ -38,6 +34,7 @@ export const getStaticProps = async () => {
   const page = {
     title,
     date,
+    description: 'How to learn',
   };
 
   return {
