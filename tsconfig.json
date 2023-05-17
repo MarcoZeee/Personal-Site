@@ -52,5 +52,5 @@
   "include": [
     "**/*.ts",
     "**/*.tsx"
-  ]
+, "posts/blogs/react.mdx", "pages/blog/[slug].mdx"  ]
 }

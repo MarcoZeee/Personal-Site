@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { Container} from '@components';
-import Post from "posts/react.mdx";
+import Post from "@posts/blogs/react.mdx";
 // import {MDXProvider} from '@mdx-js/react';
 
 const POSTS = {
