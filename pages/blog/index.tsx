@@ -3,25 +3,48 @@ import { NextPage } from "next";
 
 import { Title, Container, Grid, Card, Text, Link } from "@components";
 import { useRouter } from "next/router";
-import { blogsInfo } from "text";
 
 type BlogEntry = {
+  id: string;
   title: string;
-  description: string;
-  date: string;
-  slug: string;
-  image: string;
+  content: string;
+  likes: number;
+  date?: string;
+  image_url?: string;
 };
 interface BlogProps {
   pages: BlogEntry[];
 }
 
+export const getStaticProps = async () => {
+  const result = await fetch("https://old-butterfly-35.deno.dev/api/blogs", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "API_KEY": process.env.API_KEY!
+    },
+  });
+  const pages = await result.json();
+  return {
+    props: {
+      pages
+    },
+  };
+}
 
-const Blog: NextPage<BlogProps> = () => {
+const Blog: NextPage<BlogProps> = ({
+  pages
+}) => {
   const router = useRouter();
   const handleClick = (slug: string) => {
     router.push(`/blog/${slug}`);
   };
+  const annotatedPages = pages?.map((page) => {
+    return {
+      ...page,
+      description: page.content.slice(0, 20) + "...",
+    }
+  });
   return (
     <Container maxWidth={1200}>
       <Head>
@@ -35,11 +58,11 @@ const Blog: NextPage<BlogProps> = () => {
         </Text>
       </Container>
       <Grid gridTemplateColumns={`1fr`} gridGap={`1rem`}>
-        {blogsInfo.map((blog) => {
+        {annotatedPages?.map((blog) => {
           return (
-            <Link href={blog.href} onClick={(e) => {
+            <Link onClick={(e) => {
               e.preventDefault();
-              handleClick(blog.href);
+              handleClick(blog.id);
             }} key={blog.title}>
               <Card margin={1}>
                 <Container>
@@ -51,51 +74,6 @@ const Blog: NextPage<BlogProps> = () => {
           );
         })}
       </Grid>
-      {/* <Grid gridTemplateColumns={["1fr", "1fr 1fr"]} gridGap={["3rem", "2rem"]}>
-        {pages.map(({ title, slug, date, cover }, i) => (
-          <a
-            key={i}
-            href={uri}
-            onClick={(e) => {
-              e.preventDefault();
-              handleClick(uri);
-            }}
-          >
-            <Card padding={[0]} margin={[0]}>
-              <Grid
-                gridTemplateColumns={"1fr"}
-                justifyItems={["center", "flex-start"]}
-                gridGap="1rem"
-              >
-                {cover && (
-                  <BlogImage
-                    src={cover}
-                    width="100%"
-                    height="auto"
-                    alt={title}
-                  />
-                )}
-                <Container
-                  gridGap=".5rem"
-                  alignItems={["center", "flex-start"]}
-                >
-                  <Title
-                    as="h2"
-                    fontSize="1.5rem"
-                    textAlign={["center", "left"]}
-                    margin={0}
-                  >
-                    {title}
-                  </Title>
-                  <Text margin={0} fontWeight="initial" fontSize=".9rem">
-                    {date}
-                  </Text>
-                </Container>
-              </Grid>
-            </Card>
-          </a>
-        ))}
-      </Grid> */}
     </Container>
   );
 };
