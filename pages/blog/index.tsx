@@ -4,13 +4,14 @@ import { NextPage } from "next";
 import { Title, Container, Grid, Card, Text, Link } from "@components";
 import { useRouter } from "next/router";
 
-type BlogEntry = {
+export type BlogEntry = {
   id: string;
   title: string;
   content: string;
   likes: number;
   date?: string;
   image_url?: string;
+  paragraphs?: string[];
 };
 interface BlogProps {
   pages: BlogEntry[];
@@ -42,8 +43,10 @@ const Blog: NextPage<BlogProps> = ({
   const annotatedPages = pages?.map((page) => {
     return {
       ...page,
-      description: page.content.slice(0, 20) + "...",
+      description: page.content.slice(0, 80) + "...",
     }
+  }).sort((a, b) => {
+    return b.likes - a.likes;
   });
   return (
     <Container maxWidth={1200}>
