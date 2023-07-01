@@ -6,10 +6,7 @@
     "forceConsistentCasingInFileNames": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "lib": [
-      "dom",
-      "es2017"
-    ],
+    "lib": ["dom", "es2017"],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -20,37 +17,19 @@
     "skipLibCheck": true,
     "strict": true,
     "target": "esnext",
+    "typeRoots": ["node_modules/@types", "types"],
     "baseUrl": ".",
     "paths": {
-      "@icons": [
-        "icons"
-      ],
-      "@icons/*": [
-        "icons/*"
-      ],
-      "@styles/*": [
-        "styles/*"
-      ],
-      "@posts": [
-        "posts"
-      ],
-      "@posts/*": [
-        "posts/*"
-      ],
-      "@components": [
-        "components"
-      ],
-      "@components/*": [
-        "components/*"
-      ]
+      "@icons": ["icons"],
+      "@icons/*": ["icons/*"],
+      "@styles/*": ["styles/*"],
+      "@posts": ["posts"],
+      "@posts/*": ["posts/*"],
+      "@components": ["components"],
+      "@components/*": ["components/*"]
     },
     "incremental": true
   },
-  "exclude": [
-    "node_modules"
-  ],
-  "include": [
-    "**/*.ts",
-    "**/*.tsx"
-, "posts/blogs/react.mdx", "pages/blog/[slug].mdx"  ]
+  "exclude": ["node_modules"],
+  "include": ["**/*.ts", "**/*.tsx"]
 }
