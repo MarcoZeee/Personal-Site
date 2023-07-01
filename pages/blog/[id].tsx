@@ -16,8 +16,8 @@ export const getStaticPaths = async () => {
       "API_KEY": process.env.API_KEY!
     },
   });
-  const pages = await result.json();
-  const paths = pages?.map((page: BlogEntry) => ({
+  const pages: BlogEntry[] = await result.json();
+  const paths = pages.map((page: BlogEntry) => ({
     params: { id: page.id.toString() },
   }));
   return {
