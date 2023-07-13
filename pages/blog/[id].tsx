@@ -16,10 +16,9 @@ export const getStaticPaths = async () => {
       "API_KEY": process.env.API_KEY!
     },
   });
-  let pages;
+  let pages: BlogEntry[];
   try {
-    pages = await result.text();
-    pages = JSON.parse(pages);
+    pages = JSON.parse(await result.text());
   } catch (e) {
     pages = [];
   }
