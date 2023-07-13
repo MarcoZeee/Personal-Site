@@ -18,11 +18,11 @@ export const getStaticPaths = async () => {
   });
   let pages: BlogEntry[];
   try {
-    pages = await result.json();
+    pages = Array.from(await result.json());
   } catch (e) {
     pages = [];
   }
-  const paths = (Array.isArray(pages)?pages:[]).map((page: BlogEntry) => ({
+  const paths = pages.map((page: BlogEntry) => ({
     params: { id: page.id.toString() },
   }));
   return {
