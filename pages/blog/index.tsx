@@ -25,7 +25,13 @@ export const getStaticProps = async () => {
       "API_KEY": process.env.API_KEY!
     },
   });
-  const pages = await result.json();
+  let pages;
+  try {
+    pages = await result.text();
+    pages = JSON.parse(pages);
+  } catch (e) {
+    pages = [];
+  }
   return {
     props: {
       pages
@@ -40,7 +46,7 @@ const Blog: NextPage<BlogProps> = ({
   const handleClick = (slug: string) => {
     router.push(`/blog/${slug}`);
   };
-  const annotatedPages = pages?.map((page) => {
+  const annotatedPages = pages.map((page) => {
     return {
       ...page,
       description: page.content.slice(0, 80) + "...",
@@ -61,7 +67,11 @@ const Blog: NextPage<BlogProps> = ({
         </Text>
       </Container>
       <Grid gridTemplateColumns={`1fr`} gridGap={`1rem`}>
-        {annotatedPages?.map((blog) => {
+        {pages.length === 0? (
+          <Text textAlign="center">
+            No blog posts yet.
+          </Text>
+        ):(annotatedPages?.map((blog) => {
           return (
             <Link onClick={(e) => {
               e.preventDefault();
@@ -75,7 +85,7 @@ const Blog: NextPage<BlogProps> = ({
               </Card>
             </Link>
           );
-        })}
+        }))}
       </Grid>
     </Container>
   );
