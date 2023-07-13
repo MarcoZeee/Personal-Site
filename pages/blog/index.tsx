@@ -27,8 +27,7 @@ export const getStaticProps = async () => {
   });
   let pages;
   try {
-    pages = await result.text();
-    pages = JSON.parse(pages);
+    pages = await result.json();
   } catch (e) {
     pages = [];
   }

@@ -18,7 +18,7 @@ export const getStaticPaths = async () => {
   });
   let pages: BlogEntry[];
   try {
-    pages = JSON.parse(await result.text());
+    pages = await result.json();
   } catch (e) {
     pages = [];
   }
