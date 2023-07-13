@@ -22,7 +22,7 @@ export const getStaticPaths = async () => {
   } catch (e) {
     pages = [];
   }
-  const paths = pages?.map((page: BlogEntry) => ({
+  const paths = (Array.isArray(pages)?pages:[]).map((page: BlogEntry) => ({
     params: { id: page.id.toString() },
   }));
   return {
