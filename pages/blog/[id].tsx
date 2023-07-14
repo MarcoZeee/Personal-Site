@@ -19,7 +19,6 @@ export const getStaticPaths = async () => {
   let pages: BlogEntry[];
   try {
     const resloved = await result.json();
-    console.log(resloved);
     pages = Array.from(resloved);
   } catch (e) {
     pages = [];
@@ -62,7 +61,11 @@ function ShowBlog({ blog }: ShowBlogProps) {
       </Head>
       <Container mb="3rem">
         <Text textAlign="center">
-          Likes: {blog.likes}
+          {/* emoji heart */}
+          <span role="img" aria-label="heart">
+            ❤️
+          </span>{" "}
+          <strong>{blog.likes}</strong>
         </Text>
       </Container>
       <Card>

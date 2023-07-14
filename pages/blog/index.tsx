@@ -78,8 +78,11 @@ const Blog: NextPage<BlogProps> = ({
             }} key={blog.title}>
               <Card margin={1}>
                 <Container>
-                  <Title fontSize={`1.5rem`}>{blog.title}</Title>
+                  <Title fontSize={`1.5rem`}>{blog.title}
+                  </Title>
+                  
                   <Text>{blog.description}</Text>
+                  <Text fontSize="0.75rem">❤️ {blog.likes}</Text>
                 </Container>
               </Card>
             </Link>
