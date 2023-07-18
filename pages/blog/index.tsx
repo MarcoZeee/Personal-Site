@@ -25,7 +25,7 @@ export const getStaticProps = async () => {
       "API_KEY": process.env.API_KEY!
     },
   });
-  let pages;
+  let pages = null;
   try {
     pages = await result.json();
   } catch (e) {
@@ -45,7 +45,7 @@ const Blog: NextPage<BlogProps> = ({
   const handleClick = (slug: string) => {
     router.push(`/blog/${slug}`);
   };
-  const annotatedPages = pages.map((page) => {
+  const annotatedPages = pages?.map((page) => {
     return {
       ...page,
       description: page.content.slice(0, 80) + "...",
