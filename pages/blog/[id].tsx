@@ -16,17 +16,14 @@ export const getStaticPaths = async () => {
       "API_KEY": process.env.API_KEY!
     },
   });
-  let pages: BlogEntry[] = [];
-  let paths: {}[] = [];
-  try {
-    pages = await result.json();
-    paths = pages?.map((page: BlogEntry) => ({
-      params: { id: page.id.toString() },
-    }));
-  }
-  catch (e) {
-    console.error(e);
-  }
+  const pages = await result.json();
+  const paths = pages.map((page: BlogEntry) => {
+    return {
+      params: {
+        id: page.id.toString(),
+      },
+    };
+  });
   return {
     paths,
     fallback: false,

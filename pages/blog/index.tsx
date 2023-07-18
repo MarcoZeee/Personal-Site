@@ -16,6 +16,7 @@ export type BlogEntry = {
 };
 interface BlogProps {
   pages: BlogEntry[];
+  errorCode: number | boolean;
 }
 export const getStaticProps = async () => {
   const result = await fetch("https://old-butterfly-35.deno.dev/api/blogs", {
@@ -25,29 +26,41 @@ export const getStaticProps = async () => {
       "API_KEY": process.env.API_KEY!
     },
   });
-  let pages = [];
-  try {
-    pages = await result.json();
-  } catch (e) {
-    pages = [];
-  }
+  const errorCode = result.ok ? false : result.status;
+  const pages = await result.json();
   return {
     props: {
-      pages
+      pages,
+      errorCode
     },
   };
 }
 
 const Blog: NextPage<BlogProps> = ({
-  pages
+  pages, errorCode
 }) => {
+  if(errorCode) {
+    return (
+      <Container maxWidth={1200}>
+        <Head>
+          <title>Blog</title>
+          <meta property="og:title" content="Blog - Marco Zee" />
+        </Head>
+        <Container mb="3rem">
+          <Title>Blog</Title>
+          <Text textAlign="center">
+            I write posts about software engineering, tech, and business thinking.
+          </Text>
+        </Container>
+        <Text textAlign="center">Error: {errorCode}</Text>
+      </Container>
+    )
+  }
   const router = useRouter();
   const handleClick = (slug: string) => {
     router.push(`/blog/${slug}`);
   };
-  let annotatedPages: BlogEntry[] = [];
-  try {
-    annotatedPages = pages?.map((page) => {
+  const annotatedPages = pages?.map((page) => {
       return {
         ...page,
         description: page.content.slice(0, 80) + "...",
@@ -55,10 +68,7 @@ const Blog: NextPage<BlogProps> = ({
     }).sort((a, b) => {
       return b.likes - a.likes;
     });
-  }
-  catch (e) {
-    annotatedPages = [];
-  }
+  
 
   return (
     <Container maxWidth={1200}>
