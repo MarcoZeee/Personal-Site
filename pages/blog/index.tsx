@@ -12,11 +12,11 @@ export type BlogEntry = {
   date?: string;
   image_url?: string;
   paragraphs?: string[];
+  description?: string;
 };
 interface BlogProps {
   pages: BlogEntry[];
 }
-
 export const getStaticProps = async () => {
   const result = await fetch("https://old-butterfly-35.deno.dev/api/blogs", {
     method: "GET",
@@ -45,14 +45,21 @@ const Blog: NextPage<BlogProps> = ({
   const handleClick = (slug: string) => {
     router.push(`/blog/${slug}`);
   };
-  const annotatedPages = pages?.map((page) => {
-    return {
-      ...page,
-      description: page.content.slice(0, 80) + "...",
-    }
-  }).sort((a, b) => {
-    return b.likes - a.likes;
-  });
+  let annotatedPages: BlogEntry[] = [];
+  try {
+    annotatedPages = pages?.map((page) => {
+      return {
+        ...page,
+        description: page.content.slice(0, 80) + "...",
+      }
+    }).sort((a, b) => {
+      return b.likes - a.likes;
+    });
+  }
+  catch (e) {
+    annotatedPages = [];
+  }
+
   return (
     <Container maxWidth={1200}>
       <Head>

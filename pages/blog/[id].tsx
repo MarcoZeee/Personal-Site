@@ -17,18 +17,19 @@ export const getStaticPaths = async () => {
     },
   });
   let pages: BlogEntry[] = [];
+  let paths: {}[] = [];
   try {
-    const resloved = await result.json();
-    pages = Array.from(resloved);
-  } catch (e) {
+    pages = await result.json();
+    paths = pages?.map((page: BlogEntry) => ({
+      params: { id: page.id.toString() },
+    }));
+  }
+  catch (e) {
     console.error(e);
   }
-  const paths = pages?.map((page: BlogEntry) => ({
-    params: { id: page.id.toString() },
-  }));
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 }
 
@@ -71,9 +72,9 @@ function ShowBlog({ blog }: ShowBlogProps) {
       <Card>
         <Container mb="3rem">
           <Title>{blog.title}</Title>
-            {blog.paragraphs?.map((paragraph) => {
+            {blog.paragraphs?.map((paragraph, i) => {
               return (
-              <Text>
+              <Text key={i}>
                 {paragraph}
               </Text>
               );
