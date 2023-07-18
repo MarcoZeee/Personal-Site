@@ -25,7 +25,7 @@ export const getStaticProps = async () => {
       "API_KEY": process.env.API_KEY!
     },
   });
-  let pages = null;
+  let pages = [];
   try {
     pages = await result.json();
   } catch (e) {

@@ -16,14 +16,14 @@ export const getStaticPaths = async () => {
       "API_KEY": process.env.API_KEY!
     },
   });
-  let pages: BlogEntry[];
+  let pages: BlogEntry[] = [];
   try {
     const resloved = await result.json();
     pages = Array.from(resloved);
   } catch (e) {
-    pages = [];
+    console.error(e);
   }
-  const paths = (Array.isArray(pages)?pages:[]).map((page: BlogEntry) => ({
+  const paths = pages?.map((page: BlogEntry) => ({
     params: { id: page.id.toString() },
   }));
   return {
