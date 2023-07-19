@@ -25,7 +25,9 @@ const getPages = async () => {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      "API_KEY": process.env.API_KEY!
+      "API_KEY": process.env.API_KEY!,
+      "mode": "cors",
+      "Allow-Access-Control-Origin": "*"
     },
   });
   const errorCode = result.ok ? false : result.status;
