@@ -9,24 +9,9 @@ interface ShowBlogProps {
 
 
 export const getStaticPaths = async () => {
-  const result = await fetch("https://old-butterfly-35.deno.dev/api/blogs", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "API_KEY": process.env.API_KEY!
-    },
-  });
-  const pages = await result.json();
-  const paths = pages.map((page: BlogEntry) => {
-    return {
-      params: {
-        id: page.id.toString(),
-      },
-    };
-  });
   return {
-    paths,
-    fallback: false,
+    paths: [],
+    fallback: "blocking",
   };
 }
 

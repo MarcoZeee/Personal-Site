@@ -3,6 +3,7 @@ import { NextPage } from "next";
 
 import { Title, Container, Grid, Card, Text, Link } from "@components";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 export type BlogEntry = {
   id: string;
@@ -18,7 +19,8 @@ interface BlogProps {
   pages: BlogEntry[];
   errorCode: number | boolean;
 }
-export const getStaticProps = async () => {
+
+const getPages = async () => {
   const result = await fetch("https://old-butterfly-35.deno.dev/api/blogs", {
     method: "GET",
     headers: {
@@ -29,16 +31,22 @@ export const getStaticProps = async () => {
   const errorCode = result.ok ? false : result.status;
   const pages = await result.json();
   return {
-    props: {
-      pages,
-      errorCode
-    },
+    pages,
+    errorCode
   };
 }
 
-const Blog: NextPage<BlogProps> = ({
-  pages, errorCode
-}) => {
+const Blog: NextPage<BlogProps> = () => {
+  const [pages , setPages] = useState<BlogProps["pages"]>([]);
+  const [errorCode, setErrorCode] = useState<BlogProps["errorCode"]>(false);
+  useEffect(() => {
+    const fetchPages = async () => {
+      const { pages, errorCode } = await getPages();
+      setPages(pages);
+      setErrorCode(errorCode);
+    }
+    fetchPages();
+  }, []);
   if(errorCode) {
     return (
       <Container maxWidth={1200}>
@@ -60,7 +68,7 @@ const Blog: NextPage<BlogProps> = ({
   const handleClick = (slug: string) => {
     router.push(`/blog/${slug}`);
   };
-  const annotatedPages = pages?.map((page) => {
+  const annotatedPages = pages.map((page) => {
       return {
         ...page,
         description: page.content.slice(0, 80) + "...",
@@ -109,6 +117,5 @@ const Blog: NextPage<BlogProps> = ({
     </Container>
   );
 };
-
 
 export default Blog;
