@@ -3,7 +3,6 @@ import { NextPage } from "next";
 
 import { Title, Container, Grid, Card, Text, Link } from "@components";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
 
 export type BlogEntry = {
   id: string;
@@ -26,8 +25,6 @@ const getPages = async () => {
     headers: {
       "Content-Type": "application/json",
       "API_KEY": process.env.API_KEY!,
-      "mode": "cors",
-      "Allow-Access-Control-Origin": "*"
     },
   });
   const errorCode = result.ok ? false : result.status;
@@ -38,17 +35,20 @@ const getPages = async () => {
   };
 }
 
-const Blog: NextPage<BlogProps> = () => {
-  const [pages , setPages] = useState<BlogProps["pages"]>([]);
-  const [errorCode, setErrorCode] = useState<BlogProps["errorCode"]>(false);
-  useEffect(() => {
-    const fetchPages = async () => {
-      const { pages, errorCode } = await getPages();
-      setPages(pages);
-      setErrorCode(errorCode);
+export const getServerSideProps = async () => {
+  const { pages, errorCode } = await getPages();
+  return {
+    props: {
+      pages,
+      errorCode
     }
-    fetchPages();
-  }, []);
+  }
+}
+
+const Blog: NextPage<BlogProps> = ({
+  pages,
+  errorCode
+}) => {
   if(errorCode) {
     return (
       <Container maxWidth={1200}>
